@@ -95,6 +95,14 @@ do_install()
   # Homebrew python gets us bottles for numpy, scipy, etc.
   brew tap homebrew/python
 
+  # Check for macOS Sierra
+  if [[ `sw_vers -productVersion` == *"10.12"* ]]
+  then
+    echo "Qt4 is no longer officially supported by brew. Installing an unofficial workaround, which disables Qt's Phonon. "
+    echo "See https://github.com/Homebrew/homebrew-core/pull/5216#issuecomment-251478385 for more information."
+    brew install cartr/qt4/qt
+  fi
+  
   # ROS infrastructure tools
   brew install libyaml || true
   pip install -U setuptools rosdep rosinstall_generator wstool rosinstall catkin_tools bloom empy sphinx pycurl
