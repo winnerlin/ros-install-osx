@@ -103,6 +103,11 @@ do_install()
     brew install cartr/qt4/qt
   fi
   
+  # Temporary workaround for mikepurvis/ros-install-osx#67
+  brew remove --force boost || true
+  brew tap homebrew/versions
+  brew install homebrew/versions/boost159
+  
   # ROS infrastructure tools
   brew install libyaml || true
   pip install -U setuptools rosdep rosinstall_generator wstool rosinstall catkin_tools bloom empy sphinx pycurl
